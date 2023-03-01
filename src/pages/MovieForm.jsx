@@ -7,7 +7,6 @@ import DirectorsForm from '../components/Directors/DirectorForm';
 import EmptyImg from '../components/EmptyImg';
 import GenresModal from '../components/Genres/GenresModal';
 import ItemsSelect from '../components/ItemsSelect';
-import { showNotification } from '../store/slices/app.slice';
 import { addMovieThunk, updateMovieThunk } from '../store/slices/movies.slice';
 import searchAndFormatMovie from '../utils/searchAndFormatMovie';
 
@@ -35,16 +34,9 @@ const MovieForm = () => {
 
     const dispatch = useDispatch();
 
-    const showError = message =>
-        dispatch(showNotification({ variant: "danger", message }));
-
     const navigate = useNavigate();
 
     const saveMovie = () => {
-        if (!movie.genres.length)
-            return showError("You must select at least one genre");
-        if (!movie.directors.length)
-            return showError("You must select at least one director");
         if (!id) {
             dispatch(addMovieThunk(movie));
             navigate("/");
@@ -91,12 +83,12 @@ const MovieForm = () => {
                     />
 
 
-                    <FloatingLabel label="Release date" className="mt-3" style={{ maxWidth: 400 }}>
+                    <FloatingLabel label="Release year" className="mb-4" style={{maxWidth: 200}}>
                         <Form.Control
-                            placeholder='Release date'
-                            type="date"
-                            value={movie.releaseDate}
-                            onChange={e => editMovie("releaseDate", e.target.value)}
+                            placeholder='Release year'
+                            value={movie.releaseYear}
+                            onChange={e => editMovie("releaseYear", e.target.value)}
+                            type="number"
                         />
                     </FloatingLabel>
 

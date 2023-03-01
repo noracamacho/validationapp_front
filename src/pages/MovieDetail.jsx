@@ -21,8 +21,6 @@ const MovieDetail = () => {
 
     if (!movie) return <></>
 
-    const releaseDate = formatDate(movie.releaseDate);
-
     const deleteMovie = () => {
         dispatch(deleteMovieThunk(movie.id))
         navigate("/")
@@ -37,23 +35,23 @@ const MovieDetail = () => {
                 <Col>
                     <h1>{movie.name}</h1>
                     <ListGroup horizontal>
-                        {movie.genres.map(genre => (
+                        {movie.genres?.map(genre => (
                             <ListGroup.Item key={genre.id}>
                                 {genre.name}
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
-                    <p className="mt-3"><b>Release date:</b> {releaseDate}</p>
+                    <p className="mt-3"><b>Release year:</b> {movie.releaseYear}</p>
                     <p >{movie.synopsis}</p>
                     <h3>Directors</h3>
                     <Row xs={1} sm={2} xl={3} className="g-4">
-                        {movie.directors.map((director) => (
+                        {movie.directors?.map((director) => (
                             <DirectorCard director={director} key={director.id} showOptions={false} />
                         ))}
                     </Row>
                     <h3 className="mt-5">Actors</h3>
                     <Row xs={1} sm={2} xl={3} className="g-4">
-                        {movie.actors.map((actor) => (
+                        {movie.actors?.map((actor) => (
                             <ActorCard actor={actor} key={actor.id} showOptions={false} />
                         ))}
                     </Row>
