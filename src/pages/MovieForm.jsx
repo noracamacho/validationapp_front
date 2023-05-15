@@ -17,7 +17,6 @@ const defaultMovie = {
 const MovieForm = () => {
 
     const { genres, actors, directors, movies } = useSelector(state => state);
-
     const { id } = useParams();
 
     useEffect(() => {
